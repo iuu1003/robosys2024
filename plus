@@ -1,16 +1,16 @@
-#!/usr/bin/python3
+#!/usr/bin/bash
 # SPDX-FileCopyrightText: 2024 Miyuu Taniguchi
 # SPDX-License-Identifier: BSD-3-Clause
 
 import sys
 
-def tonum(s):
+def tonum(s)
     try:
         return int(s)
     except:
         return float(s)
 ans = 0
-for line in sys.stdin:
-        ans += tonum(line)
+for line in sys.stdin
+	ans += tonum(line)
 
 print(ans)
