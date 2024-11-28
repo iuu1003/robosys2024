@@ -1,5 +1,5 @@
 #!/bin/bash
-# SPDX-FileCopyrightText: 2024 miyuu
+# SPDX-FileCopyrightText: 2024 Miyuu Taniguchi
 # SPDX-License-Identifier: BSD-3-Clause
 
 ng () {
