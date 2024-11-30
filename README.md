@@ -10,22 +10,23 @@
 
 
 ## クローン方法
-リポジトリをクローンgit clonehttps://github.com/iuu1003/robosys2024.git
+リポジトリをクローンgit clone https://github.com/iuu1003/robosys2024.git
 
 ## 使い方
 実行方法の例  
 $ ./baseball_mvp
 
 名前,打数,安打,打点,本塁打,盗塁,失策  
-    Miyuu,5,2,1,0,1,0  
-    Sally,4,3,2,1,0,0  
+***
+Miyuu,5,2,1,0,1,0  
+Sally,4,3,2,1,0,0  
 Jade,4,2,3,1,0,1  
 Daniel,5,0,0,0,0,0  
 Emily,4,2,1,1,0,0  
 Jasmine,1,0,1,0,0,0
 
 Ctrl+D
-
+***
 実行結果の例  
 試合のMVP判定結果
 1位: Jade (スコア:22)  
