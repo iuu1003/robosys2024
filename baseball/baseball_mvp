@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+# SPDX-FileCopyrightText: 2024 Miyuu Taniguchi
+# SPDX-License-Identifier: BSD-3-Clause
+
+import sys
+
+
+def calculate_score(player):
+    return(
+        player["hits"] * 2 +
+        player["runs_batted_in"] * 3 +
+        player["home_runs"] * 4 +
+        player["steals"] * 2 -
+        player["errors"] * 5
+    )
+
+print("選手の成績を入力してください(終了するにはCtrl+D)")
+print("名前,打数,安打,打点,本塁打,盗塁,失策")
+
+players = []
+
+for line in sys.stdin:
+    data = line.strip().split(",")
+    if len(data) != 7:
+        print("入力が正しくありません、再度入力してください")
+        continue
+
+    try:
+        player = {
+            "name": data[0],
+            "at_bats": int(data[1]),
+            "hits": int(data[2]),
+            "runs_batted_in": int(data[3]),
+            "home_runs": int(data[4]),
+            "steals": int(data[5]),
+            "errors": int(data[6]),
+        }
+    except ValueError:
+        print("数値データの入力が不正です、再度入力してください")
+        continue
+
+    player["score"] = calculate_score(player)
+    players.append(player)
+
+players = sorted(players, key=lambda x: x["score"], reverse=True)
+
+print("\n試合のMVP判定結果:")
+for rank, player in enumerate(players, start=1):
+    print(f"{rank}位: {player['name']} (スコア: {player['score']})")
+
+if players:
+    print(f"\nMVPは {players[0]['name']} です")
+else:
+    print("\n選手の情報が入力されていません")
