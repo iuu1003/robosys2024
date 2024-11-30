@@ -9,8 +9,7 @@
 
 ## 使い方
 実行方法の例
-
-./baseball_mvp
+$ ./baseball_mvp
 
 Miyuu,5,2,1,0,1,0
 
@@ -20,8 +19,8 @@ Jade,4,2,3,1,0,1
 
 Daniel,5,0,0,0,0,0
 
-Emily,4,2,1,1,0,0
-Jasmine,1,0,1,0,0,0
+#Emily,4,2,1,1,0,0
+#Jasmine,1,0,1,0,0,0
 
 ## 必要なソフトウェア
 - Python
