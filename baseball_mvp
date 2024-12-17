@@ -11,24 +11,19 @@ def calculate_score(player):
         + player["runs_batted_in"] * 3
         + player["home_runs"] * 4
         + player["steals"] * 2
-        + player["errors"] * 5
+        - player["errors"] * 5
     )
 
-print("各選手の成績を以下のように入力してください（入力し終えたら改行してCtrl+D")
-print("名前,打数,安打,打点,本塁打,盗塁,失策")
-
-players = []
-
-while True:
-    players.clear()
-    valid_input = True
-
-    for line in sys.stdin:
+#ファイルからの入力データ処理
+def process_data(data):
+    players = []
+    for line in data:
         data = line.split(",")   #入力データを","で区切る
+        if not line:
+            continue
         if len(data) != 7:       #dataに含まれる要素が７つのときのみ反映
-            print("入力されたデータ数が正しくありません")
-            valid_input = False
-            break
+            print("データ数が正しくありません")
+            continue
         try:                     #名前は文字列、成績は整数に変換
             player = {
                 "name": data[0],
@@ -41,16 +36,11 @@ while True:
             }
         except ValueError:       #数字以外の文字が入力されたときのエラー
             print("数値入力が正しくありません")
-            valid_input = False
-            break
+    return players
 
-        player["score"] = calculate_score(player)
-        players.append(player)
+input_data = sys.stdin.readlines()   #標準入力からのデータを取得
 
-    if valid_input and players:
-        break
-    else:
-        print("\nデータを再入力してください")
+players = process_data(input_data)   #データを解析
 
 players = sorted(players, key=lambda x: x["score"], reverse=True)   #スコアの降順に選手を並び替え
 

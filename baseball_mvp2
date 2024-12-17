@@ -1,0 +1,68 @@
+#!/usr/bin/python3
+# SPDX-FileCopyrightText: 2024 Miyuu Taniguchi
+# SPDX-License-Identifier: BSD-3-Clause
+
+import sys
+
+# 各選手の成績を計算
+def calculate_score(player):
+    return (
+        + player["hits"] * 2
+        + player["runs_batted_in"] * 3
+        + player["home_runs"] * 4
+        + player["steals"] * 2
+        - player["errors"] * 5  # 負の影響に修正
+    )
+
+if len(sys.argv) != 2:
+    print("使い方: python3 mvp_calculator.py <ファイル名>")
+    sys.exit(1)
+
+file_name = sys.argv[1]
+
+try:
+    with open(file_name, "r") as file:
+        lines = file.readlines()
+except FileNotFoundError:
+    print(f"エラー: ファイル '{file_name}' が見つかりません")
+    sys.exit(1)
+
+players = []
+
+for line in lines:
+    data = line.strip().split(",")  # 各行を処理し、","で区切る
+    if len(data) != 7:  # データに7つの要素があるか確認
+        print(f"データの形式が正しくありません: {line.strip()}")
+        sys.exit(1)
+    try:  # 名前は文字列、成績は整数に変換
+        player = {
+            "name": data[0],
+            "at_bats": int(data[1]),
+            "hits": int(data[2]),
+            "runs_batted_in": int(data[3]),
+            "home_runs": int(data[4]),
+            "steals": int(data[5]),
+            "errors": int(data[6]),
+        }
+    except ValueError:  # 数字以外が入力された場合のエラー処理
+        print(f"数値入力が正しくありません: {line.strip()}")
+        sys.exit(1)
+
+    player["score"] = calculate_score(player)
+    players.append(player)
+
+# スコアの降順に選手を並び替え
+players = sorted(players, key=lambda x: x["score"], reverse=True)
+
+print("\n試合のMVP判定結果")
+
+rank = 1
+for player in players:
+    print(f"{rank}位: {player['name']} (スコア: {player['score']})")
+    rank += 1
+
+if players:
+    print(f"\n今日のMVPは {players[0]['name']} です")
+else:
+    print("\n選手データが入力されていません")
+
