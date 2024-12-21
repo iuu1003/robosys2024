@@ -4,9 +4,9 @@
 
 import sys
 
-#各選手の成績を計算
+# 各選手の成績を計算
 def calculate_score(player):
-    return(
+    return (
         + player["hits"] * 2
         + player["runs_batted_in"] * 3
         + player["home_runs"] * 4
@@ -14,17 +14,18 @@ def calculate_score(player):
         - player["errors"] * 5
     )
 
-#ファイルからの入力データ処理
+# ファイルからの入力データ処理
 def process_data(data):
     players = []
     for line in data:
-        data = line.split(",")   #入力データを","で区切る
+        line = line.strip()     # 末尾の改行を削除
         if not line:
             continue
-        if len(data) != 7:       #dataに含まれる要素が７つのときのみ反映
-            print("データ数が正しくありません")
+        data = line.split(",")  # 入力データを","で区切る
+        if len(data) != 7:      # dataに含まれる要素が7つのときのみ反映
+            print(f"error: データ数が正しくありません ({line})")
             continue
-        try:                     #名前は文字列、成績は整数に変換
+        try:
             player = {
                 "name": data[0],
                 "at_bats": int(data[1]),
@@ -34,24 +35,28 @@ def process_data(data):
                 "steals": int(data[5]),
                 "errors": int(data[6])
             }
-        except ValueError:       #数字以外の文字が入力されたときのエラー
-            print("数値入力が正しくありません")
+            player["score"] = calculate_score(player)
+            players.append(player)
+        except ValueError:
+            print(f"error: 数値変換が正しくありません ({line})")
     return players
 
-input_data = sys.stdin.readlines()   #標準入力からのデータを取得
+# 標準入力からのデータを取得
+input_data = sys.stdin.readlines()
 
-players = process_data(input_data)   #データを解析
-
-players = sorted(players, key=lambda x: x["score"], reverse=True)   #スコアの降順に選手を並び替え
-
-print("\n試合のMVP判定結果")
-
-rank = 1
-for player in players:
-    print(f"{rank}位: {player['name']} (スコア:{player['score']})")
-    rank += 1
+# データを解析
+players = process_data(input_data)
 
 if players:
-    print(f"\n今日のMVPは{players[0]['name']}です")
+    players = sorted(players, key=lambda x: x["score"], reverse=True) #スコアの降順に選手を並び替え
+
+    print("\n試合のMVP判定結果")
+    rank = 1
+    for player in players:
+        print(f"{rank}位: {player['name']} (スコア:{player['score']})")
+        rank += 1
+
+    print(f"\n今日のMVPは{players[0]['name']}選手です")
 else:
-    print("\n選手の乗法が入力されていません")
+    print("\n適切な選手データが入力されていません")
+
