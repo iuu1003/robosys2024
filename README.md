@@ -1,5 +1,5 @@
 # baseball_mvpコマンド
-![test](https://github.com/iuu1003/robosys2024/actions/workflows/test.yml/badge.svg)  
+![test](https://github.com/iuu1003/robosys2024/actions/workflows/test.yml/badge)  
 野球選手の成績から試合のMVPを決めます.
 
 ## 概要
