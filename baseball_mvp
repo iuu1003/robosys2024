@@ -50,7 +50,7 @@ players = process_data(input_data)
 if players:
     players = sorted(players, key=lambda x: x["score"], reverse=True) #スコアの降順に選手を並び替え
 
-    print("\n試合のMVP判定結果")
+    print("試合のMVP判定結果")
     rank = 1
     for player in players:
         print(f"{rank}位: {player['name']} (スコア:{player['score']})")
