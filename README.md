@@ -1,15 +1,10 @@
 # baseball_mvpコマンド
-![test](https://github.com/iuu1003/robosys2024/actions/workflows/test.yml/badge.svg)  
-野球選手の成績を標準入力し、その情報から試合のMVPを決めます.
+![test](https://github.com/iuu1003/robosys2024/actions/workflows/test.yml/badge.svg)
+![test](https://github.com/iuu1003/robosys2024/actions)  
+野球選手の成績から試合のMVPを決めます.
 
 ## 概要
-- ある野球選手について名前と成績（打数、安打、打点、本塁打、盗塁、失策）の7つを入力します.
-
-- 1行に1人の選手の情報を書き、改行すると次の選手の情報が書けます.
-
-- 情報が7つ書かれていない、または成績の欄に数字以外の文字が書かれている場合は、再入力を求めます.
-
-- 情報の区切りに","を入力してください.
+- ある野球選手について、名前と成績（打数、安打、打点、本塁打、盗塁、失策）のデータが書かれたテキストファイル（players.txt）があります.
 
 - すべての選手の入力を終え、改行しCtrl+Dと入力すると、その情報から試合のMVP判定をしランキング形式で結果が表示されます.
 
@@ -21,29 +16,21 @@
 
 ## 使い方
 実行方法の例  
-`./baseball_mvp`
-
-名前,打数,安打,打点,本塁打,盗塁,失策  
-```
-Miyuu,5,2,1,0,1,0  
-Sally,4,3,2,1,0,0  
-Jade,4,2,3,1,0,1  
-Daniel,5,0,0,0,0,0  
-Emily,4,2,1,1,0,0  
-Jasmine,1,0,1,0,0,0
-```
-`Ctrl+D`  
+`cat players.txt | ./baseball_mvp`  
 
 実行結果の例  
+```
 試合のMVP判定結果  
-1位: Jade (スコア:22)  
-2位: Sally (スコア:16)  
-3位: Emily (スコア:11)  
-4位: Miyuu (スコア:9)  
-5位: Jasmine (スコア:3)  
-6位: Daniel (スコア:0)
+1位: Sally (スコア:18)  
+2位: Chocolat (スコア:13)  
+3位: Jade (スコア:12)  
+4位: Emily (スコア:11)  
+5位: Miyuu (スコア:9)  
+6位: Jasmine (スコア:3)  
+7位: Daniel (スコア:0)  
 
-今日のMVPはJadeです
+今日のMVPはSally選手です
+```
 
 ## 必要なソフトウェア
 - Python
