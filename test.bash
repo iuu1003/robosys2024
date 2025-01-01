@@ -3,8 +3,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 ng () {
-	echo ${1}行目が違うよ
-	res=1
+        echo ${1}行目が違うよ
+        res=1
 }
 
 res=0
@@ -37,6 +37,33 @@ EOF
 
 out=$(cat players.txt | ./baseball_mvp)
 [ "${out}" = "$output" ] || ng "$LINENO"
+
+rm -f players.txt
+
+### STRANGE INPUT ###
+#dataに含まれる要素が７つのときのみ反映
+cat > players.txt <<EOF
+Miyuu,5,2,1,0,1
+EOF
+
+output="error: データ数が正しくありません"
+
+out=$(cat players.txt | ./baseball_mvp)
+[ "${out}" = "$output" ] || ng "$LINENO"
+
+rm -f players.txt
+
+#成績が数字のときのみ反映
+cat > players.txt <<EOF
+Miyuu,5,あ,1,0,1,0
+EOF
+
+output="error: 数値変換が正しくありません"
+
+out=$(cat players.txt | ./baseball_mvp)
+[ "${out}" = "$output" ] || ng "$LINENO"
+
+rm -f players.txt
 
 [ "${res}" = 0 ] && echo OK
 exit $res
