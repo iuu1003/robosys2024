@@ -38,8 +38,6 @@ EOF
 out=$(cat players.txt | ./baseball_mvp)
 [ "${out}" = "$output" ] || ng "$LINENO"
 
-rm -f players.txt
-
 ### STRANGE INPUT ###
 #data
 cat > players.txt <<EOF
