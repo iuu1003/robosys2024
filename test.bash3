@@ -46,10 +46,9 @@ cat > players.txt <<EOF
 Miyuu,5,2,1,0,1
 EOF
 
-output="error: データ数が正しくありません"
-
 out=$(cat players.txt | ./baseball_mvp)
-[ "${out}" = "$output" ] || ng "$LINENO"
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
 
 [ "${res}" = 0 ] && echo OK
 exit $res
